@@ -195,6 +195,19 @@ static VALUE save(VALUE self, VALUE _output) {
   rb_raise(rb_eTypeError, "Unknown file format");
 }
 
+static VALUE rotate(VALUE self, VALUE _angle) {
+  long angle = NUM2LONG(_angle);
+
+  FIBITMAP *bitmap, *image;
+  if ((angle % 45) != 0) rb_raise(rb_eArgError, "Angle must be 45 degree skew");
+  GET_BITMAP(bitmap);
+  image = FreeImage_Rotate(bitmap, angle, NULL);
+  if (image) {
+    copy_icc_profile(self, bitmap, image);
+    return wrap_and_yield(image, self, 0);
+  }
+  return Qnil;
+}
 
 
 #ifdef __cplusplus
@@ -207,6 +220,7 @@ extern "C" {
     rb_define_method(c, "height", (VALUE(*)(ANYARGS))height, 0);
     rb_define_method(c, "resize", (VALUE(*)(ANYARGS))resize, 2);
     rb_define_method(c, "save", (VALUE(*)(ANYARGS))save, 1);
+    rb_define_method(c, "rotate", (VALUE(*)(ANYARGS))rotate, 1);
     rb_define_method(c, "width", (VALUE(*)(ANYARGS))width, 0);
     rb_define_method(c, "with_crop", (VALUE(*)(ANYARGS))with_crop, 4);
     rb_define_singleton_method(c, "with_image", (VALUE(*)(ANYARGS))with_image, 1);
