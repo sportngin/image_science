@@ -3,6 +3,10 @@
 * http://seattlerb.rubyforge.org/ImageScience.html
 * http://rubyforge.org/projects/seattlerb
 
+NOTE: This fork is derived from https://github.com/Asynchrony/image_science
+which is a fork of the original project converted to not use RubyInline, which
+requires a compiler to be installed at runtime.
+
 == DESCRIPTION:
 
 ImageScience is a clean and happy Ruby library that generates
