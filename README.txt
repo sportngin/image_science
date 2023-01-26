@@ -4,8 +4,12 @@
 * http://rubyforge.org/projects/seattlerb
 
 NOTE: This fork is derived from https://github.com/Asynchrony/image_science
-which is a fork of the original project converted to not use RubyInline, which
-requires a compiler to be installed at runtime.
+which is a fork of the original project converted to not use RubyInline.
+
+Unfortunately, the Asynchrony fork is not maintained anymore, but the desire to
+still use image_science without using RubyInline is real. RubyInline requires a
+compiler at runtime, which greatly increases the surface area of the production
+application, and is generally much less secure.
 
 == DESCRIPTION:
 
